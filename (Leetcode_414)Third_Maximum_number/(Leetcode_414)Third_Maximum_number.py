@@ -76,7 +76,7 @@
 inputFile = "D:\\Projects\\leetcode\\(Leetcode_414)Third_Maximum_number\\input.txt"
 outputFile = "D:\\Projects\\leetcode\\(Leetcode_414)Third_Maximum_number\\output.txt"
 
-def run(in_p: str, out_p: str):
+def run1(in_p: str, out_p: str):
     with open(in_p, "r", encoding = "utf-8") as fin, open(out_p, "w", encoding = "utf-8") as fout:
         for line in fin:
             line = line.split() #kiểu dữ liệu hiện tại là list
@@ -101,8 +101,34 @@ def thirdMax1(array):
             return i
     return array[len(array)-1]
 
-    # return res
+run1(inputFile, outputFile)
 
-run(inputFile, outputFile)
+#Solution 2: Use 3 for loops to find the first, second, third maximum number
+def run2(in_p: str, out_p: str):
+    with open(in_p, "r", encoding = "utf-8") as fin, open(out_p, "w", encoding = "utf-8") as fout:
+        for line in fin:
+            line = line.split() #kiểu dữ liệu hiện tại là list
+            array = [int(x) for x in line] #chuyển thành kiểu dữ liệu mảng
+            print(thirdMax2(array))
+            print()
 
+def thirdMax2(array):
+    if len(array) == 1:
+        return array[0]
+    if len(array) == 2:
+        return array[0] if array[0] >= array[1] else array[1]
+    run1(inputFile, outputFile)
+    first = second = third = float('-inf')
+    for x in array:
+        if x > first:
+            first = x
+    for x in array:
+        if x > second and x < first:
+            second = x
+    for x in array:
+        if x > third and x < second:
+            third = x
+    return third if third > float('-inf') else first
+
+run2(inputFile, outputFile)
 
