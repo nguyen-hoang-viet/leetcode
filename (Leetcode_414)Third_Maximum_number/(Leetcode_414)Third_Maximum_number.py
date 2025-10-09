@@ -73,56 +73,56 @@
 #=======================================================================================
 
 # Solution 1: Sort array and use for loop to find the third distinct maximum number
-inputFile = "D:\\Projects\\leetcode\\(Leetcode_414)Third_Maximum_number\\input.txt"
-outputFile = "D:\\Projects\\leetcode\\(Leetcode_414)Third_Maximum_number\\output.txt"
+# inputFile = "D:\\Projects\\leetcode\\(Leetcode_414)Third_Maximum_number\\input.txt"
+# outputFile = "D:\\Projects\\leetcode\\(Leetcode_414)Third_Maximum_number\\output.txt"
 
-def run1(in_p: str, out_p: str):
-    with open(in_p, "r", encoding = "utf-8") as fin, open(out_p, "a", encoding = "utf-8") as fout:
-        for line in fin:
-            line = line.split() #kiểu dữ liệu hiện tại là list
-            array = [int(x) for x in line] #chuyển thành kiểu dữ liệu mảng
-            # print(thirdMax1(array))
-            # print()
-            fout.write(str(thirdMax1(array)) + "\n") 
+# def run1(in_p: str, out_p: str):
+#     with open(in_p, "r", encoding = "utf-8") as fin, open(out_p, "a", encoding = "utf-8") as fout:
+#         for line in fin:
+#             line = line.split() #kiểu dữ liệu hiện tại là list
+#             array = [int(x) for x in line] #chuyển thành kiểu dữ liệu mảng
+#             # print(thirdMax1(array))
+#             # print()
+#             fout.write(str(thirdMax1(array)) + "\n") 
 
-def thirdMax1(array):
-    if len(array) == 1:
-        return array[0]
-    if len(array) == 2:
-        return array[0] if array[0] >= array[1] else array[1]
-    array = sorted(array)
-    print(array)
-    change = 0
-    thirdMax = array[len(array)-1]
-    for i in reversed(array):
-        if i < thirdMax:
-            thirdMax = i
-            change += 1
-        if change == 2:
-            return i
-    return array[len(array)-1]
+# def thirdMax1(array):
+#     if len(array) == 1:
+#         return array[0]
+#     if len(array) == 2:
+#         return array[0] if array[0] >= array[1] else array[1]
+#     array = sorted(array)
+#     print(array)
+#     change = 0
+#     thirdMax = array[len(array)-1]
+#     for i in reversed(array):
+#         if i < thirdMax:
+#             thirdMax = i
+#             change += 1
+#         if change == 2:
+#             return i
+#     return array[len(array)-1]
 
-run1(inputFile, outputFile)
+# run1(inputFile, outputFile)
 
-from typing import List
+# from typing import List
 
-class Solution:
-    def thirdMax(self, nums: List[int]) -> int:
-        if len(nums) == 1:
-            return nums[0]
-        if len(nums) == 2:
-            return nums[0] if nums[0] >= nums[1] else anumsray[1]
-        nums = sorted(nums)
-        print(nums)
-        change = 0
-        thirdMax = nums[len(nums)-1]
-        for i in reversed(nums):
-            if i < thirdMax:
-                thirdMax = i
-                change += 1
-            if change == 2:
-                return i
-        return nums[len(nums)-1]
+# class Solution:
+#     def thirdMax(self, nums: List[int]) -> int:
+#         if len(nums) == 1:
+#             return nums[0]
+#         if len(nums) == 2:
+#             return nums[0] if nums[0] >= nums[1] else nums[1]
+#         nums = sorted(nums)
+#         print(nums)
+#         change = 0
+#         thirdMax = nums[len(nums)-1]
+#         for i in reversed(nums):
+#             if i < thirdMax:
+#                 thirdMax = i
+#                 change += 1
+#             if change == 2:
+#                 return i
+#         return nums[len(nums)-1]
 
 # #Solution 2: Use 3 for loops to find the first, second, third maximum number
 # def run2(in_p: str, out_p: str):
@@ -154,3 +154,52 @@ class Solution:
 # print("Solution 2")
 # run2(inputFile, outputFile)
 
+# from typing import List
+
+# class Solution:
+#     def thirdMax(self, nums: List[int]) -> int:
+#         if len(nums) == 1:
+#             return nums[0]
+#         if len(nums) == 2:
+#             return nums[0] if nums[0] >= nums[1] else nums[1]
+#         print(nums)
+#         first = second = third = float('-inf')
+#         for x in nums:
+#             if x > first:
+#                 first = x
+#         for x in nums:
+#             if x > second and x < first:
+#                 second = x
+#         for x in nums:
+#             if x > third and x < second:
+#                 third = x
+#         return third if third > float('-inf') else first
+
+#Solution 3: use 3 variables to store the first, second, third maximum number
+
+from typing import List
+
+class Solution:
+    def thirdMax(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        if len(nums) == 2:
+            return nums[0] if nums[0] >= nums[1] else nums[1]
+        first = second = third = float('-inf')
+        for num in nums:
+            if num == first or num == second or num == third:
+                continue
+
+            if num > first:
+                third = second
+                second = first
+                first = num
+
+            elif num > second:
+                third = second
+                second = num
+
+            elif num > third:
+                third = num
+        
+        return third if third > float('-inf') else first
