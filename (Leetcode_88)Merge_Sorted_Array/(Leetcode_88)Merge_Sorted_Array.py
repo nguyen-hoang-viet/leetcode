@@ -82,27 +82,44 @@
 
 # Solution 2: Create a new array with length is m + n
 #
+# from typing import List
+#
+# class Solution:
+#     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+#         merge_arr = []
+#         i = j = 0
+#         while i + j < m + n -1:
+#             if i == m and j < n:
+#                 while j < n:
+#                     merge_arr.append(nums2[j])
+#                     j+=1
+#             if i < m and j == n:
+#                 while i < m:
+#                     merge_arr.append(nums1[i])
+#                     i+=1
+#             if nums1[i] <= nums2[j]:
+#                 merge_arr.append(nums1[i])
+#                 i+=1
+#             else:
+#                 merge_arr.append(nums2[j])
+#                 j+=1
+#         nums1 = merge_arr
+
+# Solution 3: Use 2 pointer i and j for nums1 and nums2 and swap elements
+#
 from typing import List
 
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-        merge_arr = []
         i = j = 0
-        while i + j < m + n -1:
-            if i == m and j < n:
-                while j < n:
-                    merge_arr.append(nums2[j])
-                    j+=1
-            if i < m and j == n:
-                while i < m:
-                    merge_arr.append(nums1[i])
-                    i+=1
-            if nums1[i] <= nums2[j]:
-                merge_arr.append(nums1[i])
-                i+=1
-            else:
-                merge_arr.append(nums2[j])
+
+        while j < n:
+            if i <= m + n - 2 and nums1[i] <= nums2[j]:
                 j+=1
-        nums1 = merge_arr
+            else:
+                nums1[m+n-2] = nums1[i]
+                nums1[i] = nums2[j]
+                nums2[j] = nums1[m+n-2]
+                i+=1
 
 
