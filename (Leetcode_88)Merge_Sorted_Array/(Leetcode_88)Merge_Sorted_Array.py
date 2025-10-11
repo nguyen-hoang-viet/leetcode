@@ -49,4 +49,33 @@
 #   + Output: a single array sorted in non-decreasing order (nums1)
 #
 #- Define solution
-#   + Solution 1: Copy elements of nums2 to nums1
+#   + Solution 1: Copy elements of nums2 to nums1 after that use sorted function for nums1
+#       * Time complexity: sort is O(nlogn)
+#
+#   + Solution 2: Create a new array with length is m + n
+#                   Use 2 pointer i and j for nums1 and nums2 to get elements of them into new array with the rule
+#                   the element that have the value smaller will go first
+#       * Time complexity: O(m + n) -> that good
+#       * Space: m + n -> that bad because it wastes storage resources
+#
+#   + Solution 3: Use 2 pointer i and j for nums1 and nums2.
+#                   Pointer i start from 0 to m-1, j start from 0
+#                   If nums1[i] > nums2[j] -> swap(nums1[i], nums2[j]) and i+=1
+#       * Time complexity: O(m + n)
+#
+#   + Solution 4: The same with solution 3 but start from the end of nums1
+#       * Time complexity: O(m + n)
+#
+#=======================================================================================
+#                                       Implement
+#=======================================================================================
+
+# Solution 1: Copy elements of nums2 to nums1 after that use sorted function for nums1
+#
+# from typing import List
+#
+# class Solution:
+#     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+#         for i in range (m, m+n):
+#             nums1[i] = nums2[i-m]
+#         nums1 = sorted(nums1) # Tạo ra một mảng mới rồi gán ngược lại vào nums1 nên không tính là in-place
