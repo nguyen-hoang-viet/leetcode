@@ -107,19 +107,36 @@
 
 # Solution 3: Use 2 pointer i and j for nums1 and nums2 and swap elements
 #
+# from typing import List
+
+# class Solution:
+#     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+#         i = j = 0
+#
+#         while j < n:
+#             if i <= m + n - 2 and nums1[i] <= nums2[j]:
+#                 j+=1
+#             else:
+#                 nums1[m+n-2] = nums1[i]
+#                 nums1[i] = nums2[j]
+#                 nums2[j] = nums1[m+n-2]
+#                 i+=1
+
+# Solution 4: The same with solution 3 but start from the end of nums1
+#
 from typing import List
 
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-        i = j = 0
-
-        while j < n:
-            if i <= m + n - 2 and nums1[i] <= nums2[j]:
-                j+=1
+        i = m - 1
+        j = n - 1
+        k = m + n - 1
+        while(j >= 0):
+            if (i >= 0 and nums1[i] > nums2[j]):
+                nums1[k] = nums1[i]
+                i -= 1
             else:
-                nums1[m+n-2] = nums1[i]
-                nums1[i] = nums2[j]
-                nums2[j] = nums1[m+n-2]
-                i+=1
-
+                nums1[k] = nums2[j]
+                j -= 1
+            k -= 1
 
