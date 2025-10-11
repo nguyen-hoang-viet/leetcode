@@ -79,3 +79,30 @@
 #         for i in range (m, m+n):
 #             nums1[i] = nums2[i-m]
 #         nums1 = sorted(nums1) # Tạo ra một mảng mới rồi gán ngược lại vào nums1 nên không tính là in-place
+
+# Solution 2: Create a new array with length is m + n
+#
+from typing import List
+
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        merge_arr = []
+        i = j = 0
+        while i + j < m + n -1:
+            if i == m and j < n:
+                while j < n:
+                    merge_arr.append(nums2[j])
+                    j+=1
+            if i < m and j == n:
+                while i < m:
+                    merge_arr.append(nums1[i])
+                    i+=1
+            if nums1[i] <= nums2[j]:
+                merge_arr.append(nums1[i])
+                i+=1
+            else:
+                merge_arr.append(nums2[j])
+                j+=1
+        nums1 = merge_arr
+
+
