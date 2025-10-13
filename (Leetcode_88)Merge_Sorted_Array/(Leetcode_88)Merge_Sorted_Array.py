@@ -58,7 +58,7 @@
 #       * Time complexity: O(m + n) -> that good
 #       * Space: m + n -> that bad because it wastes storage resources
 #
-#   + Solution 3: Use 2 pointer i and j for nums1 and nums2.
+#   + Solution 3 (can't implement because it wrong): Use 2 pointer i and j for nums1 and nums2.
 #                   Pointer i start from 0 to m-1, j start from 0
 #                   If nums1[i] > nums2[j] -> swap(nums1[i], nums2[j]) and i+=1
 #       * Time complexity: O(m + n)
@@ -82,45 +82,28 @@
 
 # Solution 2: Create a new array with length is m + n
 #
-from typing import List
-
-class Solution:
-    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-        merge_arr = []
-        i = j = 0
-        while i < m or j < n:
-            if nums1[i] <= nums2[j]:
-                merge_arr.append(nums1[i])
-                i+=1
-            else:
-                merge_arr.append(nums2[j])
-                j+=1
-            if i == m and j < n:
-                while j < n:
-                    merge_arr.append(nums2[j])
-                    j+=1
-            if i < m and j == n:
-                while i < m:
-                    merge_arr.append(nums1[i])
-                    i+=1
-        nums1 = merge_arr
-
-# Solution 3: Use 2 pointer i and j for nums1 and nums2 and swap elements
-#
 # from typing import List
 
 # class Solution:
 #     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+#         merge_arr = []
 #         i = j = 0
-#
-#         while j < n:
-#             if i <= m + n - 2 and nums1[i] <= nums2[j]:
-#                 j+=1
-#             else:
-#                 nums1[m+n-2] = nums1[i]
-#                 nums1[i] = nums2[j]
-#                 nums2[j] = nums1[m+n-2]
+#         while i < m or j < n:
+#             if nums1[i] <= nums2[j]:
+#                 merge_arr.append(nums1[i])
 #                 i+=1
+#             else:
+#                 merge_arr.append(nums2[j])
+#                 j+=1
+#             if i == m and j < n:
+#                 while j < n:
+#                     merge_arr.append(nums2[j])
+#                     j+=1
+#             if i < m and j == n:
+#                 while i < m:
+#                     merge_arr.append(nums1[i])
+#                     i+=1
+#         nums1 = merge_arr
 
 # Solution 4: The same with solution 3 but start from the end of nums1
 #
