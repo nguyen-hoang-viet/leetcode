@@ -42,3 +42,20 @@
 #       * Time complexity: O(n)
 #       * Space complexity: O(n) -> because ...
 #   + Solution 4: create a stack because stack is FILO -> do this for practise about stack
+
+#=======================================================================================
+#                                       Implement
+#=======================================================================================
+
+# Solution 1: Create a new array
+
+from typing import List
+
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        new_s = []
+        for i in reversed(s):
+            new_s.append(i)
+        s = new_s
+        print(s)
+
