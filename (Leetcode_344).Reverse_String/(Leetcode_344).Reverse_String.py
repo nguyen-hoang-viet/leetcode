@@ -49,13 +49,28 @@
 
 # Solution 1: Create a new array
 
+# from typing import List
+#
+# class Solution:
+#     def reverseString(self, s: List[str]) -> None:
+#         new_s = []
+#         for i in reversed(s):
+#             new_s.append(i)
+#         s = new_s
+#         print(s)
+
+# Solution 2: use 2 point "l" and "r", start from the begin and the end of array
+
 from typing import List
 
 class Solution:
     def reverseString(self, s: List[str]) -> None:
-        new_s = []
-        for i in reversed(s):
-            new_s.append(i)
-        s = new_s
-        print(s)
+        l = 0
+        r = len(s) - 1
+        while l < r:
+            temp = s[l]
+            s[l] = s[r]
+            s[r] = temp
+            l += 1
+            r -= 1
 
